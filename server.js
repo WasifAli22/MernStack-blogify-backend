@@ -4,6 +4,8 @@ const usersRouter = require('./routes/users/usersRouter');
 require('./config/database')();
 
 const app = express();
+//middlewares
+app.use(express.json()); //Pass incoming data
 
 // Routes
 app.use('/', usersRouter)
