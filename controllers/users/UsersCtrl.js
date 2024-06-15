@@ -66,3 +66,24 @@ exports.login = asyncHandler(async (req, res) => {
       token: generateToken(user),
   });
 });
+
+// @desc    profile
+exports.getProfile = async (req, res,next) => {
+ //! get user id from params
+  const id = req.userAuth._id;
+  const user = await User.findById(id);
+  try {
+    
+    res.json({
+      status: "success",
+      message: "Profile fetched",
+      user,
+    });
+  } catch (error) {
+    res.json({
+      status: "failed",
+      message: "Profile not fetched",
+      // user,
+    });
+  }
+};
