@@ -1,6 +1,7 @@
 const User = require("../../model/User/User");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
+const generateToken = require("../../utils/generateToken");
 
 // @desc    Register a new user
 exports.register = async (req, res) => {
@@ -58,11 +59,10 @@ exports.login = asyncHandler(async (req, res) => {
   user.lastLogin = new Date();
   res.json({
     status: "success",
-    user
-    //   email: user?.email,
-    //   _id: user?._id,
-    //   username: user?.username,
-    //   role: user?.role,
-    //   token: generateToken(user),
+      email: user?.email,
+      _id: user?._id,
+      username: user?.username,
+      role: user?.role,
+      token: generateToken(user),
   });
 });
