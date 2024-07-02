@@ -4,6 +4,8 @@ const usersRouter = require('./routes/users/usersRouter');
 const { notFound, globalErrHandler } = require('./middlewares/globalErrorHandler');
 const categoryRouter = require('./routes/category/categoryRouter');
 require('./config/database')();
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 //middlewares
