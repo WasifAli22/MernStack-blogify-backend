@@ -23,10 +23,12 @@ const categorySchema = new mongoose.Schema(
         },
 
         // Posts related to the category, referenced by the ObjectId from the Post model
-        posts: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Post",
-        },
+        posts: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Post",
+            }
+        ],
     },
     {
         // Automatically include createdAt and updatedAt fields
@@ -34,8 +36,8 @@ const categorySchema = new mongoose.Schema(
     }
 );
 
-// Compile the schema into a model
-const Category = mongoose.model("Category", categorySchema);
+// Compile the schema into a model if it doesn't already exist
+const Category = mongoose.models.Category || mongoose.model("Category", categorySchema);
 
 // Export the model to use it in other parts of the application
 module.exports = Category;
