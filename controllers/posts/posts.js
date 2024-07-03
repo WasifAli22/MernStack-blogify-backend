@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const Category = require("../../model/Category/Category");
+const Category = require("../../model/category/Category");
 const Post = require("../../model/Post/Post");
 const User = require("../../model/User/User");
 //@desc  Create a post
@@ -57,7 +57,7 @@ exports.createPost = asyncHandler(async (req, res) => {
 //@access Private
 
 exports.getPosts = asyncHandler(async (req, res) => {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).populate("comments")
     res.status(201).json({
       status: "success",
       message: "Posts successfully fetched",
