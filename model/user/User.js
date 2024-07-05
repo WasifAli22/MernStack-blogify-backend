@@ -87,6 +87,7 @@ const userSchema = new mongoose.Schema(
 
         // Array of user references who follow this user
         followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+        following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 
         // Array of user references who are blocked by this user
         blockedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
