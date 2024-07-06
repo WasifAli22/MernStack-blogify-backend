@@ -71,26 +71,40 @@ exports.login = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc    profile
-exports.getProfile = async (req, res, next) => {
+//@desc  Get profile
+//@route GET /api/v1/users/profile/
+//@access Private
+
+exports.getProfile = asyncHandler(async (req, res, next) => {
   //! get user id from params
   const id = req.userAuth._id;
-  const user = await User.findById(id);
-  try {
-
-    res.json({
-      status: "success",
-      message: "Profile fetched",
-      user,
+  const user = await User.findById(id)
+    .populate({
+      path: "posts",
+      model: "Post",
+    })
+    .populate({
+      path: "following",
+      model: "User",
+    })
+    .populate({
+      path: "followers",
+      model: "User",
+    })
+    .populate({
+      path: "blockedUsers",
+      model: "User",
+    })
+    .populate({
+      path: "profileViewers",
+      model: "User",
     });
-  } catch (error) {
-    res.json({
-      status: "failed",
-      message: "Profile not fetched",
-      // user,
-    });
-  }
-};
+  res.json({
+    status: "success",
+    message: "Profile fetched",
+    user,
+  });
+});
 
 //@desc   Block user
 //@route  PUT /api/v1/users/block/:userIdToBlock
@@ -331,7 +345,7 @@ exports.accountVerificationEmail = expressAsyncHandler(async (req, res) => {
   const user = await User.findById(req?.userAuth?._id);
   if (!user) {
     throw new Error("User not found");
-  } 
+  }
   //send the token
   const token = await user.generateAccVerificationToken();
   //resave

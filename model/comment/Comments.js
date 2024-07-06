@@ -26,6 +26,14 @@ const commentSchema = new mongoose.Schema(
     {
         // Automatically include createdAt and updatedAt fields
         timestamps: true,
+        timestamps: true,
+        toJSON: {
+            virtuals: true,
+        },
+        toObject: {
+            virtuals: true,
+        },
+
     }
 );
 
