@@ -1,7 +1,7 @@
-const { register, login, getProfile, blockUser, unblockUser, profileViewers, followingUser, unFollowingUser, forgotpassword, resetPassword } = require("../../controllers/users/UsersCtrl");
+const { register, login, getProfile, blockUser, unblockUser, profileViewers, followingUser, unFollowingUser, forgotpassword, resetPassword, accountVerificationEmail, verifyAccount } = require("../../controllers/users/UsersCtrl");
 const express = require("express");
+const isLoggin = require("../../middlewares/isLoggin");
 const usersRouter = express.Router();
-isLoggin = require("../../middlewares/isLoggin");
 // register route
 usersRouter.post('/register', register);
 // login route
@@ -25,5 +25,9 @@ usersRouter.put('/unfollowing/:userToUnFollowId', isLoggin, unFollowingUser);
 usersRouter.post('/forgot-password', forgotpassword);
 // Reset password 
 usersRouter.post('/reset-password/:resetToken', resetPassword);
+// Account verification Email 
+usersRouter.put('/account-verification-email',isLoggin, accountVerificationEmail);
+// Verify Account  
+usersRouter.put('/verify-account/:verifyToken',isLoggin, verifyAccount);
 
 module.exports = usersRouter;
