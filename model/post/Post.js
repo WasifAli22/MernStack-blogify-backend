@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema(
         // URL of the post's image, defaults to an empty string
         image: {
             type: String,
-            default: "",
+            required: true,
         },
 
         // Number of claps (likes) the post has received, defaults to 0

@@ -2,10 +2,17 @@ const express = require("express");
 const isLoggin = require("../../middlewares/isLoggin");
 const { createPost, getPosts, getPost, updatePost, deletePost, likePost, disLikePost, claps, schedule, getPublicPosts } = require("../../controllers/posts/posts");
 const checkAccountVerification = require("../../middlewares/isAccountVerified");
+const storage = require("../../utils/fileUpload");
 const postsRouter = express.Router();
+const multer = require("multer");
+
+//! file upload middleware
+
+const upload = multer({ storage });
+
 
 // create
-postsRouter.post("/", isLoggin,checkAccountVerification, createPost )
+postsRouter.post("/", isLoggin, upload.single("file"), createPost);
 // get all posts
 postsRouter.get("/", getPosts )
 // get single post
