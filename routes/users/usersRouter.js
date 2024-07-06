@@ -1,4 +1,4 @@
-const { register, login, getProfile, blockUser, unblockUser, profileViewers, followingUser, unFollowingUser } = require("../../controllers/users/UsersCtrl");
+const { register, login, getProfile, blockUser, unblockUser, profileViewers, followingUser, unFollowingUser, forgotpassword, resetPassword } = require("../../controllers/users/UsersCtrl");
 const express = require("express");
 const usersRouter = express.Router();
 isLoggin = require("../../middlewares/isLoggin");
@@ -21,5 +21,9 @@ usersRouter.get('/profile-viewer/:userProfileId', isLoggin, profileViewers);
 usersRouter.put('/following/:userToFollowId', isLoggin, followingUser);
 // UnFollowing user 
 usersRouter.put('/unfollowing/:userToUnFollowId', isLoggin, unFollowingUser);
+// Forgot password 
+usersRouter.post('/forgot-password', forgotpassword);
+// Reset password 
+usersRouter.post('/reset-password/:resetToken', resetPassword);
 
 module.exports = usersRouter;
