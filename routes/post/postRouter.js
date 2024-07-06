@@ -1,6 +1,6 @@
 const express = require("express");
 const isLoggin = require("../../middlewares/isLoggin");
-const { createPost, getPosts, getPost, updatePost, deletePost } = require("../../controllers/posts/posts");
+const { createPost, getPosts, getPost, updatePost, deletePost, likePost, disLikePost } = require("../../controllers/posts/posts");
 const checkAccountVerification = require("../../middlewares/isAccountVerified");
 const postsRouter = express.Router();
 
@@ -14,6 +14,10 @@ postsRouter.get("/:id", getPost )
 postsRouter.put("/:id",isLoggin, updatePost )
 // delete post
 postsRouter.delete("/:id",isLoggin, deletePost )
+// Like post
+postsRouter.put("/likes/:id",isLoggin, likePost )
+// DisLike post
+postsRouter.put("/dislikes/:id",isLoggin, disLikePost )
 
 
 module.exports = postsRouter;
