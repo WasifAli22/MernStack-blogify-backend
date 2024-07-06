@@ -2,6 +2,11 @@ const { register, login, getProfile, blockUser, unblockUser, profileViewers, fol
 const express = require("express");
 const isLoggin = require("../../middlewares/isLoggin");
 const usersRouter = express.Router();
+const multer = require("multer");
+const storage = require("../../utils/fileUpload");
+
+//! file upload middleware
+const upload = multer({ storage });
 // register route
 usersRouter.post('/register', register);
 // login route
