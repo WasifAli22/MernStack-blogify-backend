@@ -1,10 +1,11 @@
 const express = require("express");
 const isLoggin = require("../../middlewares/isLoggin");
 const { createPost, getPosts, getPost, updatePost, deletePost } = require("../../controllers/posts/posts");
+const checkAccountVerification = require("../../middlewares/isAccountVerified");
 const postsRouter = express.Router();
 
 // create
-postsRouter.post("/", isLoggin, createPost )
+postsRouter.post("/", isLoggin,checkAccountVerification, createPost )
 // get all posts
 postsRouter.get("/", getPosts )
 // get single post
